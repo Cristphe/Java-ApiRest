@@ -11,3 +11,4 @@
 # Adicionado SwaggerConfig para testes!
 Após iniciar aplicação entrar no link: http://localhost:8080/swagger-ui/index.html 
 
+# Adicionado aos testes em SwaggerConfig Exceptions de mensagens!
