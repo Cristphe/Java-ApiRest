@@ -1,44 +1,60 @@
-/*package dio.web.api.doc;
+package dio.web.api.doc;
 
-
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import dio.web.api.model.Usuario;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Contact;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
-import io.swagger.v3.oas.models.servers.Server;
 
-@Configuration
+@RestController
 public class SwaggerConfig {
 
+    private final List<Usuario> usuarios = createList();
 
-    @Bean
-    public OpenAPI myOpenAPI() {
-        Server devServer = new Server();
-        devServer.setDescription("Server URL in Development environment");
-
-        Server prodServer = new Server();
-        prodServer.setDescription("Server URL in Production environment");
-
-        Contact contact = new Contact();
-        contact.setEmail("");
-        contact.setName("");
-        contact.setUrl("");
-
-        License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
-
-        Info info = new Info()
-                .title("Tutorial Management API")
-                .version("1.0")
-                .contact(contact)
-                .description("This API exposes endpoints to manage tutorials.").termsOfService("")
-                .license(mitLicense);
-
-        return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
+    public List<Usuario> firstPage() {
+        return usuarios;
     }
-}*/
+
+    @DeleteMapping(path = {"/{id}"})
+    public Usuario delete(@PathVariable("id") int id) {
+        Usuario deleteUsuario = null;
+        for (Usuario login : usuarios) {
+            if (login.getId().equals(id)) {
+                usuarios.remove(login);
+                deleteUsuario = login;
+                break;
+            }
+        }
+        return deleteUsuario;
+    }
+
+    @PostMapping
+    public Usuario create(@RequestBody Usuario user) {
+        usuarios.add(user);
+        System.out.println(usuarios);
+        return user;
+    }
+
+    private static List<Usuario> createList() {
+        List<Usuario> usuarios = new ArrayList<>();
+        Usuario login1 = new Usuario();
+        login1.setLogin("login1");
+        login1.setId(Integer.valueOf("5"));
+
+
+        Usuario login2 = new Usuario();
+        login2.setLogin("login1");
+        login2.setId(Integer.valueOf("2"));
+        usuarios.add(login1);
+        usuarios.add(login2);
+        return usuarios;
+    }
+}

@@ -8,7 +8,6 @@
 
 👀 Testes iniciais de Delete e Insert de usuários com Postman
 
-# Adicionado Swagger para testes!
+# Adicionado SwaggerConfig para testes!
 Após iniciar aplicação entrar no link: http://localhost:8080/swagger-ui/index.html 
 
-SwaggerConfig ainda em processo de criação!
