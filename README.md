@@ -7,4 +7,8 @@
 ====
 
 👀 Testes iniciais de Delete e Insert de usuários com Postman
+<<<<<<< HEAD
 ===
+=======
+===
+>>>>>>> 0ab5dffd122d754d808cd6665660fee576cbc2c9
